@@ -11,7 +11,7 @@
   </head>
 
   <body class="<%= @public_view ? "public" : "" %>">
-    <% if !@public_view %>
+    <% if !@public_view && controller_name!="sessions"  %>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">

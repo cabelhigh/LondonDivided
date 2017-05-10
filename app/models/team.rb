@@ -9,6 +9,7 @@ class Team < ApplicationRecord
   before_update :payout_properties
   before_destroy :cleanup_references
   validates :phone_num, presence: true, length: {minimum: 10, maximum: 12}
+  validates :guild_name, presence: true
   after_validation :format_phone_num, :convert_carrier
 
 
@@ -63,7 +64,7 @@ class Team < ApplicationRecord
   end
 
   def send_hour_message client
-    client.account.messages.create(from: "+16194040062", to: "+#{phone_num}", body: "Dear valued #{faction_format}, you have a payout to collect back at the main booth! It is #{format_payout}.")
+    client.account.messages.create(from: "+16194040062", to: "+#{phone_num}", body: "Dear valued #{faction}, you have a payout to collect back at the main booth! It is #{format_payout}.")
   end
 
   def send_welcome_message
@@ -75,9 +76,6 @@ class Team < ApplicationRecord
     end
   end
 
-  def faction_format
-    faction == 1 ? "Lamplighter" : "Rosarian"
-  end
 
   private
 
@@ -100,6 +98,7 @@ class Team < ApplicationRecord
       self.next_upkeep_hour = DateTime.now.at_end_of_hour+1.second
       self.last_contacted = DateTime.now
       self.outstanding_payout = Array.new(5, 0)
+      self.faction = (Team.all.count%2==0 ? "Lamplighter" : "Rosarian")
     end
 
     def initial_payout
@@ -119,6 +118,7 @@ class Team < ApplicationRecord
       self.owned_properties.destroy_all
       self.recieved_quests.destroy_all
       self.owned_contracts.destroy_all
+      self.recieved_clues.destroy_all
     end
 
     def get_district_output(prop_id, dist)

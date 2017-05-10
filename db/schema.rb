@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170509225041) do
+ActiveRecord::Schema.define(version: 20170510215400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -147,8 +147,10 @@ ActiveRecord::Schema.define(version: 20170509225041) do
     t.datetime "next_upkeep_hour"
     t.datetime "last_contacted"
     t.integer  "outstanding_payout", default: [],              array: true
-    t.integer  "faction"
+    t.string   "faction"
     t.string   "carrier"
+    t.integer  "net_worth"
+    t.string   "guild_name"
   end
 
   add_foreign_key "checkpoints", "teams"

@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th>Phone num</th>
-      <th>Id</th>
+      <th>Guild Name</th>
       <th>Faction</th>
       <th>Money</th>
       <th>Blue info</th>
@@ -18,11 +18,11 @@
   </thead>
 
   <tbody>
-    <% @teams.each do |team| %>
+    <% @teams.each.sort_by{|t| t.guild_name}.each do |team| %>
       <tr>
         <td><%= team.phone_num %></td>
-        <td><%= team.id %></td>
-        <td><%= team.faction_format %></td>
+        <td><%= team.guild_name %></td>
+        <td><%= team.faction %></td>
         <td><%= team.money %>£</td>
         <td><%= team.blue_info %> <div class="circle circle0"></div></td>
         <td><%= team.red_info %> <div class="circle circle1"></div></td>

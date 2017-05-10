@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @checkpoint.name %>
+</p>
+
+<p>
+  <strong>Object:</strong>
+  <%= @checkpoint %>
+</p>
+
+<%= link_to 'Edit', edit_checkpoint_path(@checkpoint) %> |
+<%= link_to 'Back', checkpoints_path %>

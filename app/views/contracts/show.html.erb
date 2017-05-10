@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @contract.name %>
+</p>
+
+
+<p>
+  <strong>Money output:</strong>
+  <%= @contract.money_output %>
+</p>
+
+<p>
+  <strong>Info output:</strong>
+  <%= @contract.info_output %>
+</p>
+
+<p>
+  <strong>Item output:</strong>
+  <%= @contract.item_output %>
+</p>
+
+<p>
+  <strong>Upkeep:</strong>
+  <%= "Every #{@contract.format_upkeep} hours:minutes" %>
+</p>
+
+<%= link_to 'Edit', edit_contract_path(@contract) %> |
+<%= link_to 'Back', contracts_path %>

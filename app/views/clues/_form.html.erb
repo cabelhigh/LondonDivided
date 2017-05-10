@@ -1,0 +1,42 @@
+<%= form_for(clue) do |f| %>
+  <% if clue.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(clue.errors.count, "error") %> prohibited this clue from being saved:</h2>
+
+      <ul>
+      <% clue.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :day %>
+    <%= f.number_field :day %>
+  </div>
+
+  <div class="field">
+    <%= f.label :faction %>
+    <%= f.number_field :faction %>
+  </div>
+
+  <div class="field">
+    <%= f.label :points %>
+    <%= f.number_field :points %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Id:</strong>
+  <%= @property.id %>
+</p>
+
+
+<p>
+  <strong>Name:</strong>
+  <%= @property.name %>
+</p>
+
+<p>
+  <strong>Rent:</strong>
+  <%= @property.price %>£ per turn
+</p>
+
+<p>
+  <strong>Money Output:</strong>
+  <%= @property.money_output %>£ per turn
+</p>
+
+<div class="payout">
+  <strong>Info Output:</strong>
+  <%= @property.info_output %><div class="circle circle<%=@property.district%>"></div> per turn
+</div>
+
+<p><strong>Renters:</strong></p>
+<ul>
+  <% OwnedProperty.all.map{|op| op if op.property_id==@property.id}.compact.each do |op| %>
+    <% team = Team.find(op.team_id) %>
+    <li><%= link_to "#{team.phone_num}", team %></li>
+  <% end %>
+</ul>
+
+
+
+<%= link_to 'Edit', edit_property_path(@property) %> |
+<%= link_to 'Back', properties_path %>

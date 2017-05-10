@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @clue.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @clue.description %>
+</p>
+
+<p>
+  <strong>Day:</strong>
+  <%= @clue.day %>
+</p>
+
+<p>
+  <strong>Faction:</strong>
+  <%= @clue.faction %>
+</p>
+
+<p>
+  <strong>Points:</strong>
+  <%= @clue.points %>
+</p>
+
+<%= link_to 'Edit', edit_clue_path(@clue) %> |
+<%= link_to 'Back', clues_path %>

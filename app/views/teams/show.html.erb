@@ -1,0 +1,139 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Phone num:</strong>
+  <%= @team.phone_num %>
+</p>
+
+<p>
+  <strong>Carrier:</strong>
+  <%= @team.carrier %>
+</p>
+
+<p>
+  <strong>Id:</strong>
+  <%= @team.id %>
+</p>
+
+<p>
+
+</p>
+
+<table style="padding-left: 25px;">
+  <tbody>
+    <tr>
+      <td>
+        <strong>Money:</strong>
+        <%= @team.money %>£
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Blue info:</strong>
+        <%= @team.blue_info %> <div class="circle circle0"></div>
+      </td>
+
+      <td>
+        <strong>Red info:</strong>
+        <%= @team.red_info %> <div class="circle circle1"></div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Green info:</strong>
+        <%= @team.green_info %> <div class="circle circle2"></div>
+      </td>
+
+      <td>
+        <strong>Orange info:</strong>
+        <%= @team.orange_info %> <div class="circle circle3"></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="payout">
+  <strong>Outstanding Payout: </strong>
+  <% @team.outstanding_payout.each_with_index do |o, i| %>
+    <% if i == 0 %>
+      <%=o%>£
+    <% else %>
+      <%=o%><div class="circle circle<%=i-1%>"></div>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="payout">
+  <strong>Upcoming Payout: </strong>
+  <% @team.payout_properties.each_with_index do |o, i| %>
+    <% if i == 0 %>
+      <%=o%>£
+    <% else %>
+      <%=o%><div class="circle circle<%=i-1%>"></div>
+    <% end %>
+  <% end %>
+</div>
+
+<p><strong>In Progress Contracts:</strong></p>
+<ul>
+  <% @team.owned_contracts.each do |oc| %>
+    <% contract = Contract.find(oc.contract_id) %>
+    <li><%=link_to "#{contract.name}", contract%> <%="#{contract.money_output}, #{contract.info_output}, #{contract.item_output} -- Cashes out every #{contract.format_upkeep} hours:minutes" %>  </li>
+  <% end %>
+</ul>
+
+<p><strong>Upcoming Rent Owed: </strong><%= @team.get_rent%>£</p>
+
+
+<p><strong>Time Now:</strong><%= DateTime.now.strftime("%l:%M%P")%></p>
+
+<p><strong>Next Payout Time: </strong><%= (@team.next_upkeep_hour-7.hours).strftime("%l:%M%P")%></p>
+
+<p><strong>Owned Properties:</strong></p>
+<ul>
+  <% @team.owned_properties.each do |i| %>
+    <% prop = Property.find(i.property_id) %>
+    <li>Id <%=link_to "#{prop.id}", prop%>: Generating <%=prop.money_output%>£ per turn and <%= prop.info_output%> <div class="circle circle<%=prop.district%>"></div> per turn; Rent is <%=prop.price%>£ per turn</li>
+  <% end %>
+</ul>
+<div class="payout">
+  <%= form_for @team, :url => buy_prop_path do |f| %>
+  <%= f.label :Buy_Property %>
+  <%= f.select :owned_properties, Property.all.map{|p| p.id if @team.money >= p.price}.compact %>
+
+  <%= f.submit %>
+  <% end %>
+
+</div>
+
+<p><strong>In Progress Quests:</strong></p>
+<ul>
+  <% @team.recieved_quests.map{|q| q if q.status==1}.compact.each do |rq| %>
+    <% quest = Quest.find(rq.quest_id) %>
+    <li><%=link_to "#{quest.quest_name}", quest%></li>
+  <% end %>
+</ul>
+
+
+<div class="payout">
+  <%= form_for @team, :url => get_clue_path do |f| %>
+  <%= f.label :Get_Clue %>
+  <%= f.select :recieved_clues, Clue.all.map{|c| c.name} %>
+
+  <%= f.submit %>
+  <% end %>
+
+</div>
+
+
+
+<p><strong>Collected Clues:</strong></p>
+<ul>
+  <% @team.recieved_clues.each do |rc| %>
+    <% clue = Clue.find(rc.clue_id) %>
+    <li><%=link_to "#{clue.name}", clue%> <%= " -- #{clue.faction}, #{clue.points}"%></li>
+  <% end %>
+</ul>
+
+<%= link_to 'Edit', edit_team_path(@team) %> |
+<%= link_to 'Back', teams_path %>

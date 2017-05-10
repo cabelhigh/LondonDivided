@@ -1,0 +1,73 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Quest name:</strong>
+  <%= @quest.quest_name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @quest.description %>
+</p>
+
+<p>
+  <strong>Day:</strong>
+  <%= @quest.day_to_string %>
+</p>
+
+<p>
+  <strong>Quest type:</strong>
+  <%= @quest.quest_type_to_string %> Quest
+</p>
+
+<p>
+  <strong>Money output:</strong>
+  <%= @quest.money_output %>£
+</p>
+<div class="payout">
+  <strong>Info output:</strong>
+    <%= @quest.blue_output %><div class="circle circle0"></div>
+    <%= @quest.red_output %><div class="circle circle1"></div>
+    <%= @quest.green_output %><div class="circle circle2"></div>
+    <%= @quest.orange_output %><div class="circle circle3"></div>
+
+</div>
+
+<p>
+  <strong>Clue output:</strong>
+  <%= !@quest.clue_output.nil? ? Clue.find(@quest.clue_output).name : "No clue" %>
+</p>
+
+
+<p>
+  <strong>Item output:</strong>
+  <%= @quest.item_output %>
+</p>
+
+<p><strong>Current Teams:</strong></p>
+<ul>
+  <% @quest.recieved_quests.sort_by{|s| s.status}.each do |rc| %>
+    <% team = Team.find(rc.team_id) %>
+    <li><%=link_to "#{team.phone_num}", team%> -- <%=(rc.status==2 ? "Completed" : "In Progress") %></li>
+  <% end %>
+  <%= "<li>No teams have recieved this quest.</li>".html_safe if @quest.recieved_quests.sort_by{|s| s.status}.empty? %>
+</ul>
+
+<% if !@quest.dependent_on.nil? %>
+  <p>
+    <strong>Dependent on:</strong>
+    <%= @quest.dependent_on %>
+  </p>
+<% end %>
+
+<% if !@quest.unlocks.nil? %>
+  <p>
+    <strong>Unlocks:</strong>
+    <%= @quest.unlocks %>
+  </p>
+<% end %>
+
+
+
+<%= link_to 'Edit', edit_quest_path(@quest) %> |
+<%= link_to 'Back', quests_path %>

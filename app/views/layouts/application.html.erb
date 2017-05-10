@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>XAdmin</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  </head>
+
+  <body class="<%= @public_view ? "public" : "" %>">
+    <% if !@public_view %>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand">London Divied</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="<%='active' if controller_name=='teams' %>"><%= link_to 'Teams', teams_path %></li>
+              <li class="<%='active' if controller_name=='properties' %>"> <%= link_to 'Properties', properties_path %></li>
+              <li class="<%='active' if controller_name=='quests' %>"> <%= link_to 'Quests', quests_path %></li>
+              <li class="<%='active' if controller_name=='clues' %>"> <%= link_to 'Clues', clues_path %></li>
+              <li class="<%='active' if controller_name=='contracts' %>"> <%= link_to 'Contracts', contracts_path %></li>
+              <li class="<%='active' if controller_name=='items' %>"> <%= link_to 'Items', items_path %></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><%= link_to "Sign Out", destroy_admin_session_path, method: :delete if current_admin %></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+    <% end %>
+    <div class="container">
+      <%= yield %>
+
+    </div>
+  </body>
+</html>

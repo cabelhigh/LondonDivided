@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Quests</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Quest name</th>
+      <th>Description</th>
+      <th>Day</th>
+      <th>Quest type</th>
+      <th>Money output</th>
+      <th>Item output</th>
+      <th>Dependent on</th>
+      <th>Unlocks</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @quests.each do |quest| %>
+      <tr>
+        <td><%= quest.quest_name %></td>
+        <td><%= quest.description %></td>
+        <td><%= quest.day %></td>
+        <td><%= quest.quest_type %></td>
+        <td><%= quest.money_output %></td>
+        <td><%= quest.item_output %></td>
+        <td><%= quest.dependent_on %></td>
+        <td><%= quest.unlocks %></td>
+        <td><%= link_to 'Show', quest %></td>
+        <td><%= link_to 'Edit', edit_quest_path(quest) %></td>
+        <td><%= link_to 'Destroy', quest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Quest', new_quest_path %>

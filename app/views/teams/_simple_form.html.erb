@@ -1,0 +1,22 @@
+<%= form_for(team) do |f| %>
+  <% if team.errors.any? %>
+    <div id="error_explanation" style= "color: black; width: auto;">
+      <h2><%= pluralize(team.errors.count, "error") %> prohibited this team from being saved:</h2>
+
+      <ul>
+      <% team.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :phone_num %>
+    <%= f.text_field :phone_num, :style => 'color:black'  %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit :class => 'circle1' %>
+  </div>
+<% end %>

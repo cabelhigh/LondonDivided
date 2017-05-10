@@ -1,0 +1,43 @@
+// Place all the styles related to the Teams controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  display: inline-block;
+}
+
+.circle0 {
+  background-color: blue;
+}
+
+.circle1 {
+  background-color: red;
+}
+
+.circle2 {
+  background-color: green;
+}
+
+.circle3 {
+  background-color: orange;
+}
+
+.payout {
+  margin: 33px;
+}
+
+#team_form {
+  background-color: gray;
+  padding: 10px;
+  width: 300px;
+  color: white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+
+}

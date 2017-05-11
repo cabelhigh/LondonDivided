@@ -122,7 +122,7 @@ class TeamsController < ApplicationController
     account_sid = "AC9e9bfc18bbe241dbce81a0874e809d12"
     auth_token = "953bb0be1b63e1d1736e1b2030419da7"
     client = Twilio::REST::Client.new account_sid, auth_token
-    @messages = client.account.messages.list.map{|m| "#{m.body.tr('+','')} -- #{Time.parse(m.date_updated).strftime("%m/%d/%Y %I:%M %p")}"  if m.body.first == "+" && !Team.find_by_phone_num(m.body.tr('+','').split(":").first).nil?}.compact
+    @messages = client.account.messages.list.map{|m| "#{m.body.tr('+','')} -- #{Time.parse(m.date_updated-7.hours).strftime("%m/%d/%Y %I:%M %p")}"  if m.body.first == "+" && !Team.find_by_phone_num(m.body.tr('+','').split(":").first).nil?}.compact
     render 'sms_log.html.erb'
 
   end

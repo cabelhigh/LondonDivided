@@ -19,12 +19,13 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="<%='active' if controller_name=='teams' %>"><%= link_to 'Teams', teams_path %></li>
+              <li class="<%='active' if controller_name=='teams' && action_name!='generate_sms_log'%>"><%= link_to 'Teams', teams_path %></li>
               <li class="<%='active' if controller_name=='properties' %>"> <%= link_to 'Properties', properties_path %></li>
               <li class="<%='active' if controller_name=='quests' %>"> <%= link_to 'Quests', quests_path %></li>
               <li class="<%='active' if controller_name=='clues' %>"> <%= link_to 'Clues', clues_path %></li>
               <li class="<%='active' if controller_name=='contracts' %>"> <%= link_to 'Contracts', contracts_path %></li>
               <li class="<%='active' if controller_name=='items' %>"> <%= link_to 'Items', items_path %></li>
+              <li class="<%='active' if action_name=='generate_sms_log' %>"> <%= link_to 'SMS Log', sms_log_path %></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><%= link_to "Sign Out", destroy_admin_session_path, method: :delete if current_admin %></li>

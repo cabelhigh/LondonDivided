@@ -11,7 +11,13 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.json
   def show
+  #   account_sid = "AC9e9bfc18bbe241dbce81a0874e809d12"
+  #   auth_token = "953bb0be1b63e1d1736e1b2030419da7"
+  #   client = Twilio::REST::Client.new account_sid, auth_token
+  #   @messages = client.account.messages.list.map{|m| m.body.tr('+','') if m.body.first == "+" && !Team.find_by_phone_num(m.body.tr('+','').split(":").first).nil?}.compact
   end
+
+  #Putting this on ice for now until we can sort out the weird Twilio message-sending bug
 
   # GET /teams/new
   def new
@@ -110,6 +116,15 @@ class TeamsController < ApplicationController
     auth_token = "953bb0be1b63e1d1736e1b2030419da7"
     client = Twilio::REST::Client.new account_sid, auth_token
     @teams.each{ |t| t.send_hour_message client }
+  end
+
+  def generate_sms_log
+    account_sid = "AC9e9bfc18bbe241dbce81a0874e809d12"
+    auth_token = "953bb0be1b63e1d1736e1b2030419da7"
+    client = Twilio::REST::Client.new account_sid, auth_token
+    @messages = client.account.messages.list.map{|m| "#{m.body.tr('+','')} -- #{Time.parse(m.date_updated).strftime("%m/%d/%Y %I:%M %p")}"  if m.body.first == "+" && !Team.find_by_phone_num(m.body.tr('+','').split(":").first).nil?}.compact
+    render 'sms_log.html.erb'
+
   end
 
   private

@@ -1,0 +1,7 @@
+<h2>SMS Log</h2>
+<ul>
+  <% @messages.each do |m| %>
+    <% num_and_mes = m.split(":") %>
+  <li><%="#{Team.find_by_phone_num(num_and_mes.first).guild_name}/" unless Team.find_by_phone_num(num_and_mes.first).nil?%><%=link_to "#{num_and_mes.first}", Team.find_by_phone_num(num_and_mes.first)%>:<%= num_and_mes[1..2].join(":")%></li>
+  <% end %>
+</ul>

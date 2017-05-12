@@ -1,26 +1,18 @@
 <p id="notice"><%= notice %></p>
 
-<% if current_admin.has_role? :admin %>
-  <p>
-    <strong>Phone num:</strong>
-    <%= @team.phone_num %>
-  </p>
-<% end %>
+<p>
+  <strong>Phone num:</strong>
+  <%= @team.phone_num %>
+</p>
 
 <p>
   <strong>Guild Name:</strong>
   <%= @team.guild_name %>
 </p>
 
-<% if current_admin.has_role? :admin %>
-
-  <p>
-    <strong>Id:</strong>
-    <%= @team.id %>
-  </p>
-<% end %>
 <p>
-
+  <strong>Id:</strong>
+  <%= @team.id %>
 </p>
 
 <table style="padding-left: 25px;">
@@ -89,7 +81,7 @@
 <p><strong>Upcoming Rent Owed: </strong><%= @team.get_rent%>£</p>
 
 
-<p><strong>Time Now:</strong><%= DateTime.now.strftime("%l:%M%P")%></p>
+<p><strong>Time Now: </strong><%= DateTime.now.strftime("%l:%M%P")%></p>
 
 <p><strong>Next Payout Time: </strong><%= (@team.next_upkeep_hour-7.hours).strftime("%l:%M%P")%></p>
 
@@ -99,18 +91,22 @@
     <% prop = Property.find(i.property_id) %>
     <li>Id <%=link_to "#{prop.id}", prop%>: Generating <%=prop.money_output%>£ per turn and <%= prop.info_output%> <div class="circle circle<%=prop.district%>"></div> per turn; Rent is <%=prop.price%>£ per turn</li>
   <% end %>
+
+  <% if @team.owned_properties.empty? %>
+    <li>No owned properties</li>
+  <% end %>
 </ul>
-<% if current_admin.has_role? :admin %>
-  <div class="payout">
-    <%= form_for @team, :url => buy_prop_path do |f| %>
-    <%= f.label :Buy_Property %>
-    <%= f.select :owned_properties, Property.all.map{|p| p.id if @team.money >= p.price}.compact %>
 
-    <%= f.submit %>
-    <% end %>
+<div class="payout">
+  <%= form_for @team, :url => buy_prop_path do |f| %>
+  <%= f.label :Buy_Property %>
+  <%= f.select :owned_properties, Property.all.map{|p| p.id if @team.money >= p.price}.compact %>
 
-  </div>
-<% end %>
+  <%= f.submit %>
+  <% end %>
+
+</div>
+
 
 <p><strong>In Progress Quests:</strong></p>
 <ul>
@@ -118,20 +114,23 @@
     <% quest = Quest.find(rq.quest_id) %>
     <li><%=link_to "#{quest.quest_name}", quest%></li>
   <% end %>
+  <% if @team.recieved_quests.empty? %>
+    <li>No active quests</li>
+  <% end %>
 </ul>
 
-<% if current_admin.has_role? :admin %>
-  <div class="payout">
-    <%= form_for @team, :url => get_clue_path do |f| %>
-    <%= f.label :Get_Clue %>
-    <%= f.select :recieved_clues, Clue.all.map{|c| c.name} %>
 
-    <%= f.submit %>
-    <% end %>
+<div class="payout">
+  <%= form_for @team, :url => get_clue_path do |f| %>
+  <%= f.label :Get_Clue %>
+  <%= f.select :recieved_clues, Clue.all.map{|c| c.name} %>
 
-  </div>
+  <%= f.submit %>
+  <% end %>
 
-<% end %>
+</div>
+
+
 
 
 
@@ -141,18 +140,21 @@
     <% clue = Clue.find(rc.clue_id) %>
     <li><%=link_to "#{clue.name}", clue%> <%= " -- Clue Subject: #{clue.clue_subject}; Clue Points: #{clue.points}"%></li>
   <% end %>
+  <% if @team.recieved_clues.empty? %>
+    <li>No collected clues</li>
+  <% end %>
 </ul>
-<% if current_admin.has_role? :admin %>
-  <p><strong>SMS Response Log:</strong></p>
-  <ul>
-    <% @messages.each do |m| %>
-      <li><%=m%></li>
-    <% end %>
-  </ul>
-<% end %>
+
+<p><strong>SMS Response Log:</strong></p>
+<ul>
+  <% @messages.each do |m| %>
+    <li><%=m%></li>
+  <% end %>
+</ul>
 
 
-<% if current_admin.has_role? :admin %>
-  <%= link_to 'Edit', edit_team_path(@team)  %> |
-<% end %>
+
+
+<%= link_to 'Edit', edit_team_path(@team)  %> |
+
 <%= link_to 'Back', teams_path %>

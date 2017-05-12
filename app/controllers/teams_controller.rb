@@ -15,10 +15,16 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.json
   def show
-    account_sid = "AC9e9bfc18bbe241dbce81a0874e809d12"
-    auth_token = "953bb0be1b63e1d1736e1b2030419da7"
-    client = Twilio::REST::Client.new account_sid, auth_token
-    @messages = client.account.messages.list.map{|m| m.body.tr('+','') if m.body.first == "+" && m.body.tr('+','').split(":").first==@team.phone_num}.compact
+    if current_admin.has_role? :vendor
+      @quests = []
+      @quests = Quest.find(@team.recieved_quests.map(&:quest_id)).where(quest_type: "Vendor") if  !Quest.find(@team.recieved_quests.map(&:quest_id)).empty?
+      render 'show_vendor.html.erb'
+    else
+      account_sid = "AC9e9bfc18bbe241dbce81a0874e809d12"
+      auth_token = "953bb0be1b63e1d1736e1b2030419da7"
+      client = Twilio::REST::Client.new account_sid, auth_token
+      @messages = client.account.messages.list.map{|m| m.body.tr('+','') if m.body.first == "+" && m.body.tr('+','').split(":").first==@team.phone_num}.compact
+    end
   end
 
   #Putting this on ice for now until we can sort out the weird Twilio message-sending bug

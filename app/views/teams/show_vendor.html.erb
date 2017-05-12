@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Guild Name:</strong>
+  <%= @team.guild_name %>
+</p>
+
+</p>
+
+<table style="padding-left: 25px;">
+  <tbody>
+    <tr>
+      <td>
+        <strong>Money:</strong>
+        <%= @team.money %>£
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<p><strong>In Progress Quests:</strong></p>
+<ul>
+  <% @quests.each do |q| %>
+    <li><%=link_to "#{q.quest_name}", q%></li>
+  <% end %>
+  <% if @quests.empty? %>
+    <li>No active quests</li>
+  <% end %>
+</ul>
+
+
+
+
+<p><strong>Collected Clues:</strong></p>
+<ul>
+  <% @team.recieved_clues.each do |rc| %>
+    <% clue = Clue.find(rc.clue_id) %>
+    <li><%=link_to "#{clue.name}", clue%> <%= " -- Clue Subject: #{clue.clue_subject}; Clue Points: #{clue.points}"%></li>
+  <% end %>
+
+  <% if @team.recieved_clues.empty? %>
+    <li>No collected clues</li>
+  <% end %>
+</ul>
+
+<%= link_to 'Back', teams_path %>

@@ -10,6 +10,7 @@ class TeamsController < ApplicationController
 
     @r_points = gen_team_points "Rosarian"
     @l_points = gen_team_points "Lamplighter"
+
   end
 
   # GET /teams/1

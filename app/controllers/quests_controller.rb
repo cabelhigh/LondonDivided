@@ -7,6 +7,19 @@ class QuestsController < ApplicationController
   # GET /quests.json
   def index
     @quests = Quest.all
+
+    unless params["search"].nil?
+      case params["search"]
+      when "main"
+        @quests=Quest.where(quest_type: "Main")
+      when "item"
+        @quests=Quest.where(quest_type: "Item")
+      when "side"
+        @quests=Quest.where(quest_type: "Side")
+      when "cash"
+        @quests=Quest.where(quest_type: "Cash")
+      end
+    end
   end
 
   # GET /quests/1

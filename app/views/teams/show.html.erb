@@ -70,16 +70,10 @@
   <% end %>
 </div>
 
-<div class="payout">
-  <strong>Upcoming Payout: </strong>
-  <% @team.payout_properties.each_with_index do |o, i| %>
-    <% if i == 0 %>
-      <%=o%>£
-    <% else %>
-      <%=o%><div class="circle circle<%=i-1%>"></div>
-    <% end %>
-  <% end %>
-</div>
+<%= form_tag(payout_path(@team.id), {:method => "patch"}) do %>
+    <%= hidden_field_tag :id , @team.id %>
+    <%= submit_tag 'Payout Outstanding Resources' %>
+<% end %>
 
 <p><strong>In Progress Contracts:</strong></p>
 <ul>

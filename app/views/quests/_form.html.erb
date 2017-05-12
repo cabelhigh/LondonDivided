@@ -58,7 +58,7 @@
 
   <div class="field">
     <%= f.label :item_output %>
-    <%= f.number_field :item_output %>
+    <%= f.select :item_output,  [0]+Item.all.each_with_index.collect{|c,i| i+1} %>
   </div>
 
   <div class="field">

@@ -7,6 +7,25 @@ class CluesController < ApplicationController
   # GET /clues.json
   def index
     @clues = Clue.all
+
+    unless params["search"].nil?
+      case params["search"]
+      when "dw"
+        @clues=Clue.where(clue_subject: "Dorothy Wimberly")
+      when "el"
+        @clues=Clue.where(clue_subject: "Erick Lewis")
+      when "hu"
+        @clues=Clue.where(clue_subject: "London University")
+      when "th"
+        @clues=Clue.where(clue_subject: "Theodore Humphries")
+      when "1"
+        @clues=Clue.where(points: 1)
+      when "2"
+        @clues=Clue.where(points: 2)
+      when "3"
+        @clues=Clue.where(points: 3)
+      end
+    end
   end
 
   # GET /clues/1

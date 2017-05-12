@@ -6,15 +6,18 @@ class TeamsController < ApplicationController
   # GET /teams.json
   def index
     @teams = Team.all
+
+    @r_points = gen_team_points "Rosarian"
+    @l_points = gen_team_points "Lamplighter"
   end
 
   # GET /teams/1
   # GET /teams/1.json
   def show
-  #   account_sid = "AC9e9bfc18bbe241dbce81a0874e809d12"
-  #   auth_token = "953bb0be1b63e1d1736e1b2030419da7"
-  #   client = Twilio::REST::Client.new account_sid, auth_token
-  #   @messages = client.account.messages.list.map{|m| m.body.tr('+','') if m.body.first == "+" && !Team.find_by_phone_num(m.body.tr('+','').split(":").first).nil?}.compact
+    account_sid = "AC9e9bfc18bbe241dbce81a0874e809d12"
+    auth_token = "953bb0be1b63e1d1736e1b2030419da7"
+    client = Twilio::REST::Client.new account_sid, auth_token
+    @messages = client.account.messages.list.map{|m| m.body.tr('+','') if m.body.first == "+" && m.body.tr('+','').split(":").first==@team.phone_num}.compact
   end
 
   #Putting this on ice for now until we can sort out the weird Twilio message-sending bug
@@ -97,7 +100,6 @@ class TeamsController < ApplicationController
   end
 
   def get_clue
-    debugger
     result = @team.get_clue Clue.find_by_name(params["team"]["recieved_clues"]).id
     respond_to do |format|
       if @team.save && result!=-1
@@ -136,5 +138,16 @@ class TeamsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
       params.require(:team).permit(:phone_num, :guild_name, :money, :blue_info, :red_info, :green_info, :orange_info, :owned_properties, team_attributes: [:owned_properties, :recieved_clues, :recieved_quests, :owned_contracts])
+    end
+
+    def gen_team_points faction
+      total_points = 0
+      @teams.each do |t|
+        if t.faction == faction
+          total_points+=t.owned_properties.count
+          total_points+=Clue.find(t.recieved_clues.map(&:clue_id)).map(&:points).sum
+        end
+      end
+      total_points
     end
 end

@@ -31,10 +31,9 @@ class Team < ApplicationRecord
   end
 
   def get_clue clue_id
-    debugger
+
     if self.recieved_clues.select{|rc| rc.clue_id==clue_id}.empty?
       self.recieved_clues << RecievedClue.create({clue_id: clue_id})
-      debugger
     else
       -1
     end

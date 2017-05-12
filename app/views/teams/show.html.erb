@@ -131,7 +131,7 @@
 <ul>
   <% @team.recieved_clues.each do |rc| %>
     <% clue = Clue.find(rc.clue_id) %>
-    <li><%=link_to "#{clue.name}", clue%> <%= " -- #{clue.faction}, #{clue.points}"%></li>
+    <li><%=link_to "#{clue.name}", clue%> <%= " -- Clue Subject: #{clue.clue_subject}; Clue Points: #{clue.points}"%></li>
   <% end %>
 </ul>
 

@@ -8,7 +8,7 @@
       <th>Name</th>
       <th>Description</th>
       <th>Day</th>
-      <th>Faction</th>
+      <th>Clue Subject</th>
       <th>Points</th>
       <th colspan="3"></th>
     </tr>
@@ -20,7 +20,7 @@
         <td><%= clue.name %></td>
         <td><%= clue.description %></td>
         <td><%= clue.day %></td>
-        <td><%= clue.faction %></td>
+        <td><%= clue.clue_subject %></td>
         <td><%= clue.points %></td>
         <td><%= link_to 'Show', clue %></td>
         <td><%= link_to 'Edit', edit_clue_path(clue) %></td>
@@ -32,4 +32,4 @@
 
 <br>
 
-<%= link_to 'New Clue', new_clue_path %>
+<%= button_to 'New Clue', new_clue_path, method: :get %>

@@ -18,22 +18,27 @@
 
   <div class="field">
     <%= f.label :description %>
-    <%= f.text_field :description %>
+    <%= f.text_area :description %>
   </div>
 
   <div class="field">
     <%= f.label :day %>
-    <%= f.number_field :day %>
+    <%= f.select :day, [1,2,3] %>
   </div>
 
   <div class="field">
-    <%= f.label :faction %>
-    <%= f.number_field :faction %>
+    <%= f.label :clue_subject %>
+    <% case @clue.day %>
+    <% when 1 %>
+      <%= f.select :clue_subject, ["Dorothy Parker", "Erick Lewis", "Theodore Humphries", "London University"]%>
+    <% else %>
+      <%= f.select :clue_subject, ["Dorothy Parker", "Erick Lewis", "Theodore Humphries", "London University"]%>
+    <% end %>
   </div>
 
   <div class="field">
     <%= f.label :points %>
-    <%= f.number_field :points %>
+    <%= f.select :points, [1,2,3,4] %>
   </div>
 
   <div class="actions">

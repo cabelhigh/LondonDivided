@@ -5,7 +5,7 @@ class Team < ApplicationRecord
   has_many :recieved_quests
   has_many :recieved_clues
   has_many :owned_contracts
-  before_create :set_defaults, :initial_payout, :send_welcome_message
+  before_create :set_defaults, :send_welcome_message
   # before_update :payout_properties
   before_destroy :cleanup_references
   validates :phone_num, presence: true, length: {minimum: 10, maximum: 12}
@@ -119,19 +119,6 @@ class Team < ApplicationRecord
       self.last_contacted = DateTime.now
       self.outstanding_payout = Array.new(5, 0)
       self.faction = (Team.all.count%2==0 ? "Lamplighter" : "Rosarian")
-    end
-
-    def initial_payout
-      case Random.rand(4)
-      when 0
-        self.blue_info = 5
-      when 1
-        self.red_info = 5
-      when 2
-        self.green_info = 5
-      else
-        self.orange_info = 5
-      end
     end
 
     def cleanup_references

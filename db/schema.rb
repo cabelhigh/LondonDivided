@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170512083312) do
+ActiveRecord::Schema.define(version: 20170512094327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,8 +100,9 @@ ActiveRecord::Schema.define(version: 20170512083312) do
     t.integer  "money_output"
     t.integer  "info_output"
     t.integer  "district"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "num_times_hour"
   end
 
   create_table "quests", force: :cascade do |t|
@@ -124,10 +125,7 @@ ActiveRecord::Schema.define(version: 20170512083312) do
     t.string   "inf_type"
     t.integer  "inf_output"
     t.integer  "level"
-<<<<<<< HEAD
     t.text     "req"
-=======
->>>>>>> random_picker
   end
 
   create_table "recieved_clues", force: :cascade do |t|

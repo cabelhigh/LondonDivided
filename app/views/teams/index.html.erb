@@ -1,7 +1,8 @@
 <p id="notice"><%= notice %></p>
-
-<h2><%= "#{session[:random_team]["guild_name"] if !session[:random_team].nil?} "%> </h2>
-<% session[:random_team]=nil %>
+<% if !session[:random_team].nil? %>
+  <h2><%= "#{session[:random_team]["guild_name"]} is the new random team! "%> </h2>
+  <% session[:random_team]=nil %>
+<% end %>
 
 <table class="table">
   <thead>

@@ -159,7 +159,8 @@
 <div class="payout">
   <%= form_for @team, :url => get_clue_path do |f| %>
   <%= f.label :Get_Clue %>
-  <%= f.select :recieved_clues, Clue.all.map{|c| c.name if @team.recieved_clues.map(&:clue_id).exclude? c.id}.compact %>
+  <%= f.select :recieved_clues, Clue.all.map{|c| c.name if @team.recieved_clues.map(&:clue_id).exclude? c.id}.compact.sort_by{|name| [name.split(" ")[0], name.split(" ")[1]]}
+ %>
 
   <%= f.submit %>
   <% end %>

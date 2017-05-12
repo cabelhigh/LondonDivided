@@ -132,6 +132,10 @@ class TeamsController < ApplicationController
     end
   end
 
+  def pick_random_rosarian
+
+  end
+
   def text_teams_at_hour
     @teams = Team.all
     account_sid = "AC9e9bfc18bbe241dbce81a0874e809d12"

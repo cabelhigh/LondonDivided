@@ -71,6 +71,6 @@ class QuestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def quest_params
-      params.require(:quest).permit(:quest_name, :description, :day, :quest_type, :money_output, :inf_type, :inf_output, :clue_output, :item_output, :notes, :dependent_on, :unlocks)
+      params.require(:quest).permit(:quest_name, :description, :req, :day, :quest_type, :money_output, :inf_type, :inf_output, :clue_output, :item_output, :notes, :dependent_on, :unlocks)
     end
 end

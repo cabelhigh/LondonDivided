@@ -7,7 +7,8 @@ class Ability
     if user.has_role? :admin
       can :manage, :all
     else
-      can [:read, :get_clue, :buy_property], [Team, Quest, Clue]
+      can :read, [Team, Item]
+      can :update, Item
     end
   end
 end

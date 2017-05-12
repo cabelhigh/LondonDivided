@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   resources :quests
   resources :items
   resources :clues
-  resources :checkpoints
   resources :teams
   resources :properties
 

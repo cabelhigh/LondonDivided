@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Items</h1>
+<%= button_to 'New Item', new_item_path, method: :get if current_admin.has_role? :admin %>
 
 <table class="table">
   <thead>
@@ -29,5 +30,3 @@
 </table>
 
 <br>
-
-<%= button_to 'New Item', new_item_path, method: :get if current_admin.has_role? :admin %>

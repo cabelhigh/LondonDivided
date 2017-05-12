@@ -1,6 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Quests</h1>
+<%= button_to 'New Quest', new_quest_path, method: :get %>
+
 
 <table class="table">
   <thead>
@@ -39,5 +41,3 @@
 </table>
 
 <br>
-
-<%= button_to 'New Quest', new_quest_path, method: :get %>

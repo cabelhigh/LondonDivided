@@ -1,5 +1,8 @@
 <p id="notice"><%= notice %></p>
 
+<h2><%= "#{session[:random_team]["guild_name"] if !session[:random_team].nil?} "%> </h2>
+<% session[:random_team]=nil %>
+
 <table class="table">
   <thead>
     <tr>
@@ -57,4 +60,10 @@
 
 <br>
 
-<%= button_to 'New Team', new_team_path, method: :get if current_admin.has_role? :admin %>
+<% if current_admin.has_role? :admin %>
+
+  <%= button_to 'New Team', new_team_path, method: :get %>
+  <%= button_to 'Pick Rosarian Team', pick_r_path, method: :get %>
+  <%= button_to 'Pick Lamplighter Team', pick_l_path, method: :get%>
+
+<% end %>

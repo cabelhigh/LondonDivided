@@ -133,7 +133,13 @@ class TeamsController < ApplicationController
   end
 
   def pick_random_rosarian
+    session[:random_team]=Team.where(faction: "Rosarian").order("RANDOM()").first
+    redirect_to :action => "index"
+  end
 
+  def pick_random_lamplighter
+    session[:random_team]=Team.where(faction: "Lamplighter").order("RANDOM()").first
+    redirect_to :action => "index"
   end
 
   def text_teams_at_hour

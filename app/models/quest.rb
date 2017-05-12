@@ -53,6 +53,7 @@ private
     self.inf_output = 0 if self.inf_output.nil?
     self.clue_output = 0 if self.clue_output.nil?
     self.item_output = 0 if self.item_output.nil?
+    self.notes = "" if self.notes.nil?
   end
 
   def sever_connections

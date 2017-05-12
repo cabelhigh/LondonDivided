@@ -10,9 +10,10 @@
       <th>Day</th>
       <th>Quest type</th>
       <th>Money output</th>
+      <th>INF output</th>
+      <th>Clue output</th>
       <th>Item output</th>
-      <th>Dependent on</th>
-      <th>Unlocks</th>
+      <th>Has notes?</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -24,10 +25,11 @@
         <td><%= quest.description %></td>
         <td><%= quest.day %></td>
         <td><%= quest.quest_type %></td>
-        <td><%= quest.money_output %></td>
-        <td><%= quest.item_output %></td>
-        <td><%= quest.dependent_on %></td>
-        <td><%= quest.unlocks %></td>
+        <td><%= quest.money_output %>£</td>
+        <td><%= quest.inf_output %><span class="circle circle<%=quest.convert_type_to_int%>"></span></td>
+        <td><%= quest.clue_output!=0 && !quest.clue_output.nil? ? link_to(Clue.find(quest.clue_output).name, Clue.find(quest.clue_output)) : "No Clue" %></td>
+        <td><%= quest.item_output!=0 ? link_to(Item.find(quest.item_output).name, Item.find(quest.item_output)) : "No Item" %></td>
+        <td><%= quest.notes.empty? ? "No notes" : "Has notes" %></td>
         <td><%= link_to 'Show', quest %></td>
         <td><%= link_to 'Edit', edit_quest_path(quest) %></td>
         <td><%= link_to 'Destroy', quest, method: :delete, data: { confirm: 'Are you sure?' } %></td>

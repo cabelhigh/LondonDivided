@@ -34,6 +34,11 @@
   <%= "<li>No teams have recieved this clue.</li>".html_safe if RecievedClue.where(clue_id: @clue.id).empty? %>
 </ul>
 
+<p>
+  <strong>Quest Giver:</strong>
+  <%= @clue.quest_giver %>
+</p>
+
 
 <%= link_to 'Edit', edit_clue_path(@clue) %> |
 <%= link_to 'Back', clues_path %>

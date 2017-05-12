@@ -2,7 +2,12 @@
 
 <h1>Clues</h1>
 <div style="display: inline-flex">
-  <%= button_to 'New Clew', new_clue_path, method: :get %>
+  <%= button_to 'New Clue', new_clue_path, method: :get %>
+  <%= form_tag({:action => "index"}, {:method => :get}) do %>
+  <div class="">
+    <%= submit_tag 'Show All Clues' %>
+  </div>
+  <% end %>
   <%= form_tag({:action => "index"}, {:method => :get}) do %>
   <%= hidden_field_tag(:search, "dw") %>
   <div class="">
@@ -46,6 +51,33 @@
   <%= hidden_field_tag(:search, "3") %>
   <div class="">
     <%= submit_tag 'Show Only 3-Point Clues' %>
+  </div>
+  <% end %>
+
+</div>
+<div style="display: inline-flex">
+  <%= form_tag({:action => "index"}, {:method => :get}) do %>
+  <%= hidden_field_tag(:search, "irene") %>
+  <div class="">
+    <%= submit_tag 'Show Only Irene Clues' %>
+  </div>
+  <% end %>
+  <%= form_tag({:action => "index"}, {:method => :get}) do %>
+  <%= hidden_field_tag(:search, "kyle") %>
+  <div class="">
+    <%= submit_tag 'Show Only Kyle Clues' %>
+  </div>
+  <% end %>
+  <%= form_tag({:action => "index"}, {:method => :get}) do %>
+  <%= hidden_field_tag(:search, "paul") %>
+  <div class="">
+    <%= submit_tag 'Show Only Paul Clues' %>
+  </div>
+  <% end %>
+  <%= form_tag({:action => "index"}, {:method => :get}) do %>
+  <%= hidden_field_tag(:search, "dwight") %>
+  <div class="">
+    <%= submit_tag 'Show Only Dwight Clues' %>
   </div>
   <% end %>
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170512110832) do
+ActiveRecord::Schema.define(version: 20170512205359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20170512110832) do
     t.integer  "clue_references", default: [],              array: true
     t.text     "description"
     t.string   "clue_subject"
+    t.string   "quest_giver"
   end
 
   create_table "contracts", force: :cascade do |t|

@@ -18,6 +18,14 @@ class CluesController < ApplicationController
         @clues=Clue.where(clue_subject: "London University")
       when "th"
         @clues=Clue.where(clue_subject: "Theodore Humphries")
+      when "irene"
+        @clues=Clue.where(quest_giver: "Irene")
+      when "kyle"
+        @clues=Clue.where(quest_giver: "Kyle")
+      when "paul"
+        @clues=Clue.where(quest_giver: "Paul")
+      when "dwight"
+        @clues=Clue.where(quest_giver: "Dwight")
       when "1"
         @clues=Clue.where(points: 1)
       when "2"
@@ -90,6 +98,6 @@ class CluesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def clue_params
-      params.require(:clue).permit(:name, :description, :day, :clue_subject, :points)
+      params.require(:clue).permit(:name, :description, :day, :clue_subject, :points, :quest_giver)
     end
 end

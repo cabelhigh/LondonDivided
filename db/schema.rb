@@ -124,7 +124,10 @@ ActiveRecord::Schema.define(version: 20170512083312) do
     t.string   "inf_type"
     t.integer  "inf_output"
     t.integer  "level"
+<<<<<<< HEAD
     t.text     "req"
+=======
+>>>>>>> random_picker
   end
 
   create_table "recieved_clues", force: :cascade do |t|

@@ -132,6 +132,16 @@ class TeamsController < ApplicationController
     end
   end
 
+  def pick_random_rosarian
+    session[:random_team]=Team.where(faction: "Rosarian").order("RANDOM()").first
+    redirect_to :action => "index"
+  end
+
+  def pick_random_lamplighter
+    session[:random_team]=Team.where(faction: "Lamplighter").order("RANDOM()").first
+    redirect_to :action => "index"
+  end
+
   def text_teams_at_hour
     @teams = Team.all
     account_sid = "AC9e9bfc18bbe241dbce81a0874e809d12"

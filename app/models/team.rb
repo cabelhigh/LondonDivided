@@ -63,8 +63,12 @@ class Team < ApplicationRecord
     outstanding_payout = Array.new(5,0)
   end
 
-  def pay_rent
-    self.money-=owned_properties.sum{|i| Property.find(i.property_id).price}
+  def add_to_payout(index, amount) #0 is money, 1-4 INFs
+    outstanding_payout[index]+=amount
+  end
+
+  def pay_rent rent
+    self.money-=rent
   end
 
   def get_rent

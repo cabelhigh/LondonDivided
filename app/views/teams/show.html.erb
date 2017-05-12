@@ -79,9 +79,19 @@
 <ul>
   <% @team.owned_contracts.each do |oc| %>
     <% contract = Contract.find(oc.contract_id) %>
-    <li><%=link_to "#{contract.name}", contract%> <%="#{contract.money_output}, #{contract.info_output}, #{contract.item_output} -- Cashes out every #{contract.format_upkeep} hours:minutes" %>  </li>
+    <li><%=link_to "#{contract.id}", contract%> <%="Worth #{contract.money_output}£ -- Cashes out every #{case contract.upkeep; when 1; "30"; when 2; "20 and 40"; when 3; "20, 40, and 60"; when 6; "10, 20, 30, 40, 50, and 60"; end} minutes" %>  </li>
   <% end %>
 </ul>
+
+<div class="payout">
+  <%= form_for @team, :url => get_contract_path do |f| %>
+  <%= f.label :Get_Contract %>
+  <%= f.select :owned_contracts, Contract.all.map{|c| c.id if  @team.owned_contracts.map(&:contract_id).exclude?(c.id)}.compact %>
+
+  <%= f.submit %>
+  <% end %>
+
+</div>
 
 <p><strong>Upcoming Rent Owed: </strong><%= @team.get_rent%>£</p>
 

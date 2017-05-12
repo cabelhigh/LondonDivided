@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   patch '/payout' => "teams#payout", as: 'payout'
   patch '/send_message/:id' => "teams#send_message", as: 'send_message'
   patch '/buy_prop/:id' => "teams#buy_property", as: 'buy_prop'
+  patch '/get_contract/:id' => "teams#get_contract", as: 'get_contract'
   patch '/get_clue/:id' => "teams#get_clue", as: 'get_clue'
   patch '/recieve_quest/:id' => "teams#recieve_quest", as: 'recieve_quest'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

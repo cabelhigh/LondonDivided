@@ -86,6 +86,19 @@ class TeamsController < ApplicationController
     redirect_to @team
   end
 
+  def get_contract
+    result = @team.get_contract params["team"]["owned_contracts"]
+    respond_to do |format|
+      if @team.save && result!=-1
+        format.html { redirect_to @team, notice: 'Property successfully bought.' }
+        format.json { render :show, status: :created, location: @team }
+      else
+        format.html { redirect_to @team, notice: 'Team already owns that property.' }
+        format.json { render json: @team.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def buy_property
     result = @team.buy_property params["team"]["owned_properties"]
     respond_to do |format|

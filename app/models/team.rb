@@ -48,6 +48,15 @@ class Team < ApplicationRecord
     end
   end
 
+  def get_contract contract_id
+    if self.owned_contracts.select{|oc| oc.contract_id==contract_id}.empty?
+      self.owned_contracts << OwnedContract.create({contract_id: contract_id})
+    else
+      -1
+    end
+
+  end
+
   #to be called AFTER someone has physically collected the payout...or however we want to do it
   def store_payout
     self.money+= self.outstanding_payout[0]

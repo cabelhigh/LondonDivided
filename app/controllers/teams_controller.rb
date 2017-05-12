@@ -82,15 +82,8 @@ class TeamsController < ApplicationController
 
   def payout
     @team.store_payout
-    respond_to do |format|
-      if @team.save
-        format.html { redirect_to @team, notice: 'Payout successfully collected.' }
-        format.json { render :show, status: :created, location: @team }
-      else
-        format.html { render :new }
-        format.json { render json: @team.errors, status: :unprocessable_entity }
-      end
-    end
+    @team.save
+    redirect_to @team
   end
 
   def buy_property
@@ -190,7 +183,7 @@ class TeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.require(:team).permit(:phone_num, :guild_name, :money, :blue_info, :red_info, :green_info, :orange_info, :owned_properties, team_attributes: [:owned_properties, :recieved_clues, :recieved_quests, :owned_contracts])
+      params.require(:team).permit(:phone_num, :id, :guild_name, :money, :blue_info, :red_info, :green_info, :orange_info, :owned_properties, team_attributes: [:owned_properties, :recieved_clues, :recieved_quests, :owned_contracts])
     end
 
     def gen_team_points faction

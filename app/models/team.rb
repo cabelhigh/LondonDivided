@@ -6,7 +6,7 @@ class Team < ApplicationRecord
   has_many :recieved_clues
   has_many :owned_contracts
   before_create :set_defaults, :initial_payout, :send_welcome_message
-  before_update :payout_properties
+  # before_update :payout_properties
   before_destroy :cleanup_references
   validates :phone_num, presence: true, length: {minimum: 10, maximum: 12}
   validates :guild_name, presence: true
@@ -48,23 +48,18 @@ class Team < ApplicationRecord
     end
   end
 
-  def payout_properties
-    [outstanding_payout,[owned_properties.sum{|i| Property.find(i.property_id).money_output}, owned_properties.sum{|i| get_district_output(i.property_id, 0)}, owned_properties.sum{|i| get_district_output(i.property_id, 1)}, owned_properties.sum{|i| get_district_output(i.property_id, 2)}, owned_properties.sum{|i| get_district_output(i.property_id, 3)} ]].transpose.map{|x| x.reduce(:+)}
-    # 0 is money, 1 is blue, 2 is red, 3 is green, 4 is orange
-  end
-
   #to be called AFTER someone has physically collected the payout...or however we want to do it
   def store_payout
-    money+=outstanding_payout[0]
-    blue_info+=outstanding_payout[1]
-    red_info+=outstanding_payout[2]
-    green_info+=outstanding_payout[3]
-    orange_info+=outstanding_payout[4]
-    outstanding_payout = Array.new(5,0)
+    self.money+= self.outstanding_payout[0]
+    self.blue_info+= self.outstanding_payout[1]
+    self.red_info+= self.outstanding_payout[2]
+    self.green_info+= self.outstanding_payout[3]
+    self.orange_info+= self.outstanding_payout[4]
+    self.outstanding_payout = Array.new(5,0)
   end
 
   def add_to_payout(index, amount) #0 is money, 1-4 INFs
-    outstanding_payout[index]+=amount
+    self.outstanding_payout[index]+=amount
   end
 
   def pay_rent rent
@@ -72,7 +67,7 @@ class Team < ApplicationRecord
   end
 
   def get_rent
-    owned_properties.sum{|i| Property.find(i.property_id).price}
+    self.owned_properties.sum{|i| Property.find(i.property_id).price}
   end
 
   def send_message(client, message)

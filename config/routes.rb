@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get '/pick_l' => "teams#pick_random_lamplighter", as: 'pick_l'
   patch '/send_rs' => "teams#send_rosarians_message", as: 'send_rs'
   patch '/send_ls' => "teams#send_lamplighters_message", as: 'send_ls'
+  patch '/payout' => "teams#payout", as: 'payout'
   patch '/send_message/:id' => "teams#send_message", as: 'send_message'
   patch '/buy_prop/:id' => "teams#buy_property", as: 'buy_prop'
   patch '/get_clue/:id' => "teams#get_clue", as: 'get_clue'

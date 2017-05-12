@@ -17,31 +17,26 @@
 
 <p>
   <strong>Quest type:</strong>
-  <%= @quest.quest_type_to_string %> Quest
+  <%= @quest.quest_type %> Quest
 </p>
 
 <p>
   <strong>Money output:</strong>
   <%= @quest.money_output %>£
 </p>
-<div class="payout">
+<p>
   <strong>Info output:</strong>
-    <%= @quest.blue_output %><div class="circle circle0"></div>
-    <%= @quest.red_output %><div class="circle circle1"></div>
-    <%= @quest.green_output %><div class="circle circle2"></div>
-    <%= @quest.orange_output %><div class="circle circle3"></div>
-
-</div>
-
+  <%= @quest.inf_output %><span class="circle circle<%=@quest.convert_type_to_int%>"></span>
+</p>
 <p>
   <strong>Clue output:</strong>
-  <%= !@quest.clue_output.nil? ? Clue.find(@quest.clue_output).name : "No clue" %>
+  <%= @quest.clue_output!=0 && !@quest.clue_output.nil? ? link_to(Clue.find(@quest.clue_output).name, Clue.find(@quest.clue_output)) : "No Clue" %>
 </p>
 
 
 <p>
   <strong>Item output:</strong>
-  <%= @quest.item_output %>
+  <%= @quest.item_output!=0 ? link_to(Item.find(@quest.item_output).name, Item.find(@quest.item_output)) : "No Item" %>
 </p>
 
 <p><strong>Current Teams:</strong></p>
@@ -53,19 +48,12 @@
   <%= "<li>No teams have recieved this quest.</li>".html_safe if @quest.recieved_quests.sort_by{|s| s.status}.empty? %>
 </ul>
 
-<% if !@quest.dependent_on.nil? %>
-  <p>
-    <strong>Dependent on:</strong>
-    <%= @quest.dependent_on %>
-  </p>
-<% end %>
+<p>
+  <strong>Notes:</strong>
+  <%= @quest.notes %>
+</p>
 
-<% if !@quest.unlocks.nil? %>
-  <p>
-    <strong>Unlocks:</strong>
-    <%= @quest.unlocks %>
-  </p>
-<% end %>
+
 
 
 

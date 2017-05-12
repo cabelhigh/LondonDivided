@@ -37,8 +37,18 @@
   </div>
 
   <div class="field">
+    <%= f.label :resource_type %>
+    <%= f.select :inf_type, ["Public", "Market", "Seedy", "Royal"] %>
+  </div>
+
+  <div class="field">
+    <%= f.label :resource_output %>
+    <%= f.number_field :inf_output %>
+  </div>
+
+  <div class="field">
     <%= f.label :clue_output %>
-    <%= f.number_field :clue_output %>
+    <%= f.select :clue_output, Clue.all.collect{|c| [c.name, c.id]}, {:include_blank => true} %>
   </div>
 
   <div class="field">
@@ -47,8 +57,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :unlocks %>
-    <%= f.number_field :unlocks %>
+    <%= f.label :notes %>
+    <%= f.text_area :notes %>
   </div>
 
   <div class="actions">

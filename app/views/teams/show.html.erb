@@ -112,7 +112,7 @@
 <ul>
   <% @team.recieved_quests.map{|q| q if q.status==1}.compact.each do |rq| %>
     <% quest = Quest.find(rq.quest_id) %>
-    <li><%=link_to "#{quest.quest_name}", quest%></li>
+    <li><%=link_to "#{quest.quest_name}", quest%>: <%=quest.format_output%></li>
   <% end %>
   <% if @team.recieved_quests.empty? %>
     <li>No active quests</li>

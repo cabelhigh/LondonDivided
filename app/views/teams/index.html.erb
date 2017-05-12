@@ -66,5 +66,18 @@
   <%= button_to 'New Team', new_team_path, method: :get %>
   <%= button_to 'Pick Rosarian Team', pick_r_path, method: :get %>
   <%= button_to 'Pick Lamplighter Team', pick_l_path, method: :get%>
+  <%= form_tag({:action => "send_rosarians_message"}, {:method => :patch}) do %>
+    <%= text_area_tag 'message' %>
+    <div class="">
+      <%= submit_tag 'Send All Rosarians Message' %>
+    </div>
+  <% end %>
+
+  <%= form_tag({:action => "send_lamplighters_message"}, {:method => :patch}) do %>
+    <%= text_area_tag 'message' %>
+    <div class="">
+      <%= submit_tag 'Send All Lamplighters Message' %>
+    </div>
+  <% end %>
 
 <% end %>

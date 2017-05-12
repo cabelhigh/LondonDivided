@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy, :payout, :buy_property, :get_clue]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :payout, :buy_property, :get_clue, :send_message]
   before_action :authenticate_admin!, except: [:new, :create]
   load_and_authorize_resource
 
@@ -130,6 +130,29 @@ class TeamsController < ApplicationController
         format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def send_message
+    account_sid = "AC9e9bfc18bbe241dbce81a0874e809d12"
+    auth_token = "953bb0be1b63e1d1736e1b2030419da7"
+    client = Twilio::REST::Client.new account_sid, auth_token
+    @team.send_message(client, params["message"])
+  end
+
+  def send_rosarians_message
+    @r_teams = Team.where(faction: "Rosarian")
+    account_sid = "AC9e9bfc18bbe241dbce81a0874e809d12"
+    auth_token = "953bb0be1b63e1d1736e1b2030419da7"
+    client = Twilio::REST::Client.new account_sid, auth_token
+    @r_teams.each{|t| t.send_message(client, params["message"])}
+  end
+
+  def send_lamplighters_message
+    @l_teams = Team.where(faction: "Lamplighter")
+    account_sid = "AC9e9bfc18bbe241dbce81a0874e809d12"
+    auth_token = "953bb0be1b63e1d1736e1b2030419da7"
+    client = Twilio::REST::Client.new account_sid, auth_token
+    @l_teams.each{|t| t.send_message(client, params["message"])}
   end
 
   def pick_random_rosarian

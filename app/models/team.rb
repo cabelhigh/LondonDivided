@@ -71,6 +71,10 @@ class Team < ApplicationRecord
     owned_properties.sum{|i| Property.find(i.property_id).price}
   end
 
+  def send_message(client, message)
+    client.account.messages.create(from: "+16194040062", to: "+#{phone_num}", body: "#{message}")
+  end
+
   def send_hour_message client
     client.account.messages.create(from: "+16194040062", to: "+#{phone_num}", body: "Dear valued #{faction}, you have a payout to collect back at the main booth! It is #{format_payout}.")
   end

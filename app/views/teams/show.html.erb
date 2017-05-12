@@ -10,6 +10,17 @@
   <%= @team.guild_name %>
 </p>
 
+
+<p><strong>Send Message:</strong></p>
+<%= form_tag({:action => "send_message"}, {:method => :patch}) do %>
+  <%= text_area_tag 'message' %>
+  <div class="">
+    <%= submit_tag 'Send Message' %>
+  </div>
+<% end %>
+
+
+
 <p>
   <strong>Id:</strong>
   <%= @team.id %>

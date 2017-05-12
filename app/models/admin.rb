@@ -11,6 +11,7 @@ class Admin < ApplicationRecord
   private
 
   def set_role
+    debugger
     if self.email!="a@a.com"
       self.add_role :vendor
     else

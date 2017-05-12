@@ -53,4 +53,4 @@
 
 <br>
 
-<%= button_to 'New Team', new_team_path, method: :get %>
+<%= button_to 'New Team', new_team_path, method: :get if current_admin.has_role? :admin %>

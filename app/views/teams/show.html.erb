@@ -1,9 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Phone num:</strong>
-  <%= @team.phone_num %>
-</p>
+<% if current_admin.has_role? :admin %>
+  <p>
+    <strong>Phone num:</strong>
+    <%= @team.phone_num %>
+  </p>
+<% end %>
 
 <p>
   <strong>Guild Name:</strong>
@@ -134,14 +136,14 @@
     <li><%=link_to "#{clue.name}", clue%> <%= " -- Clue Subject: #{clue.clue_subject}; Clue Points: #{clue.points}"%></li>
   <% end %>
 </ul>
-
-<p><strong>SMS Response Log:</strong></p>
-<ul>
-  <% @messages.each do |m| %>
-    <li><%=m%></li>
-  <% end %>
-</ul>
-
+<% if current_admin.has_role? :admin %>
+  <p><strong>SMS Response Log:</strong></p>
+  <ul>
+    <% @messages.each do |m| %>
+      <li><%=m%></li>
+    <% end %>
+  </ul>
+<% end %>
 
 
 <% if current_admin.has_role? :admin %>

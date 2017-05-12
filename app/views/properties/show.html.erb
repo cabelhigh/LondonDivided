@@ -23,8 +23,13 @@
 
 <div class="payout">
   <strong>Info Output:</strong>
-  <%= @property.info_output %><div class="circle circle<%=@property.district%>"></div> per turn
+  1<div class="circle circle<%=@property.info_output%>"></div> per turn
 </div>
+
+<p>
+  <strong>Number of Output Times An Hour:</strong>
+  <%= @property.num_times_hour %> times per hour
+</p>
 
 <p><strong>Renters:</strong></p>
 <ul>

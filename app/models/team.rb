@@ -6,7 +6,6 @@ class Team < ApplicationRecord
   has_many :recieved_clues
   has_many :owned_contracts
   before_create :set_defaults, :send_welcome_message
-  # before_update :payout_properties
   before_destroy :cleanup_references
   validates :phone_num, presence: true, length: {minimum: 10, maximum: 12}
   validates :guild_name, presence: true

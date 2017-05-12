@@ -6,8 +6,6 @@
   <thead>
     <tr>
       <th>Money output</th>
-      <th>Info output</th>
-      <th>Item output</th>
       <th>Name</th>
       <th>Upkeep</th>
       <th colspan="3"></th>
@@ -18,10 +16,8 @@
     <% @contracts.each do |contract| %>
       <tr>
         <td><%= contract.money_output %></td>
-        <td><%= contract.info_output %></td>
-        <td><%= contract.item_output %></td>
         <td><%= contract.name %></td>
-        <td><%= contract.upkeep %></td>
+        <td><%= contract.format_upkeep %> minutes</td>
         <td><%= link_to 'Show', contract %></td>
         <td><%= link_to 'Edit', edit_contract_path(contract) %></td>
         <td><%= link_to 'Destroy', contract, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -17,7 +17,6 @@ namespace :check_time_10 do
     current_minutes = Time.now.strftime("%M").to_i
 
     owned_properties.each do |op|
-      debugger
       t = Team.find(op.team_id)
       if current_minutes==0
         t.add_to_payout(Property.find(op.property_id).info_output, 1) if three_and_six.include? op.property_id

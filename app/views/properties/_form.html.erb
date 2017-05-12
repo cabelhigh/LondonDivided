@@ -22,22 +22,12 @@
   </div>
 
   <div class="field">
-    <%= f.label :money_output %>
-    <%= f.number_field :money_output %>
-  </div>
-
-  <div class="field">
     <%= f.label :info_output %>
     <%= f.select :info_output, [1,2,3,4] %>
   </div>
   <div class="field">
     <%= f.label :number_of_output_times_per_hour %>
     <%= f.select :num_times_hour, [1,2,3,6] %>
-
-  <div class="field">
-    <%= f.label :district %>
-    <%= f.text_field :district %>
-  </div>
 
   <div class="actions">
     <%= f.submit %>

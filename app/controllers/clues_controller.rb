@@ -70,6 +70,6 @@ class CluesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def clue_params
-      params.require(:clue).permit(:name, :description, :day, :faction, :points)
+      params.require(:clue).permit(:name, :description, :day, :clue_subject, :points)
     end
 end

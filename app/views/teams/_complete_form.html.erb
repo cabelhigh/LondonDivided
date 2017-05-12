@@ -15,7 +15,17 @@
     <%= f.label :phone_num %>
     <%= f.text_field :phone_num %>
   </div>
-  
+
+  <div class="field">
+    <%= f.label :guild_name %>
+    <%= f.text_field :guild_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :faction %>
+    <%= f.select :faction, ["Rosarian", "Lamplighter"] %>
+  </div>
+
   <div class="field">
     <%= f.label :money %>
     <%= f.number_field :money %>
@@ -39,6 +49,26 @@
   <div class="field">
     <%= f.label :orange_info %>
     <%= f.number_field :orange_info %>
+  </div>
+
+  <div class="field">
+    <%= f.label :next_upkeep_hour %>
+    <%= f.datetime_field :next_upkeep_hour %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_contacted %>
+    <%= f.datetime_field :last_contacted %>
+  </div>
+
+  <div class="field">
+    <%= f.label :outstanding_payout %>
+    <%= f.number_field :outstanding_payout %>
+  </div>
+
+  <div class="field">
+    <%= f.label :net_worth %>
+    <%= f.number_field :net_worth %>
   </div>
 
   <div class="actions">

@@ -34,6 +34,7 @@ class CluesController < ApplicationController
         @clues=Clue.where(points: 3)
       end
     end
+    @clues.sort_by{|c| [c.name.split(" ")[0], c.name.split(" ")[1]]}
   end
 
   # GET /clues/1

@@ -1,6 +1,7 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy, :payout, :buy_property, :get_clue]
   before_action :authenticate_admin!, except: [:new, :create]
+  load_and_authorize_resource
 
   # GET /teams
   # GET /teams.json

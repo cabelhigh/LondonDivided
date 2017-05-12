@@ -1,6 +1,7 @@
 class QuestsController < ApplicationController
   before_action :set_quest, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin!
+  load_and_authorize_resource
 
   # GET /quests
   # GET /quests.json

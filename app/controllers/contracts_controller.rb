@@ -1,7 +1,7 @@
 class ContractsController < ApplicationController
   before_action :set_contract, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin!
-
+  load_and_authorize_resource
   # GET /contracts
   # GET /contracts.json
   def index

@@ -1,6 +1,7 @@
 class CluesController < ApplicationController
   before_action :set_clue, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin!
+  load_and_authorize_resource
 
   # GET /clues
   # GET /clues.json

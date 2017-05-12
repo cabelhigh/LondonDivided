@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Log:</strong>
+  <%= @debug.log %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @debug.user %>
+</p>
+
+
+<%= link_to 'Edit', edit_debug_path(@debug) %> |
+<%= link_to 'Back', debugs_path %>

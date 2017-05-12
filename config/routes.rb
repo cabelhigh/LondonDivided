@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :debugs
   devise_for :admins, path_names: {
   sign_up: ''
 }

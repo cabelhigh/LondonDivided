@@ -29,6 +29,7 @@
               <li class="<%='active' if controller_name=='items' %>"> <%= link_to 'Items', items_path %></li>
               <% if current_admin.has_role? :admin %>
                 <li class="<%='active' if action_name=='generate_sms_log' %>"> <%= link_to 'SMS Log', sms_log_path %></li>
+                <li class="<%='active' if controller_name=='debugs' %>"> <%= link_to 'Debug Logging', debugs_path %></li>
               <% end %>
             </ul>
             <ul class="nav navbar-nav navbar-right">

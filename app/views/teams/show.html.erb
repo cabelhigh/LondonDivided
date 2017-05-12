@@ -100,7 +100,7 @@
 <div class="payout">
   <%= form_for @team, :url => buy_prop_path do |f| %>
   <%= f.label :Buy_Property %>
-  <%= f.select :owned_properties, Property.all.map{|p| p.id if @team.money >= p.price}.compact %>
+  <%= f.select :owned_properties, Property.all.map{|p| p.id if @team.money >= p.price && @team.owned_properties.map(&:property_id).exclude?(p.id)}.compact %>
 
   <%= f.submit %>
   <% end %>
@@ -119,19 +119,15 @@
   <% end %>
 </ul>
 
-
 <div class="payout">
-  <%= form_for @team, :url => get_clue_path do |f| %>
-  <%= f.label :Get_Clue %>
-  <%= f.select :recieved_clues, Clue.all.map{|c| c.name} %>
+  <%= form_for @team, :url => recieve_quest_path do |f| %>
+  <%= f.label :Recieve_Quest %>
+  <%= f.select :recieved_quests, Quest.all.map{|q| q.quest_name if @team.recieved_quests.map(&:quest_id).exclude? q.id}.compact %>
 
   <%= f.submit %>
   <% end %>
 
 </div>
-
-
-
 
 
 <p><strong>Collected Clues:</strong></p>
@@ -145,10 +141,24 @@
   <% end %>
 </ul>
 
+<div class="payout">
+  <%= form_for @team, :url => get_clue_path do |f| %>
+  <%= f.label :Get_Clue %>
+  <%= f.select :recieved_clues, Clue.all.map{|c| c.name if @team.recieved_clues.map(&:clue_id).exclude? c.id}.compact %>
+
+  <%= f.submit %>
+  <% end %>
+
+</div>
+
 <p><strong>SMS Response Log:</strong></p>
 <ul>
   <% @messages.each do |m| %>
     <li><%=m%></li>
+  <% end %>
+
+  <% if @messages.empty? %>
+    <li>No SMS responses</li>
   <% end %>
 </ul>
 

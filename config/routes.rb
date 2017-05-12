@@ -13,5 +13,6 @@ Rails.application.routes.draw do
   get '/sms_log' => "teams#generate_sms_log", as: 'sms_log'
   patch '/buy_prop/:id' => "teams#buy_property", as: 'buy_prop'
   patch '/get_clue/:id' => "teams#get_clue", as: 'get_clue'
+  patch '/recieve_quest/:id' => "teams#recieve_quest", as: 'recieve_quest'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

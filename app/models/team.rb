@@ -30,6 +30,15 @@ class Team < ApplicationRecord
     end
   end
 
+  def recieve_quest quest_id
+
+    if self.recieved_quests.select{|rq| rq.quest_id==quest_id}.empty?
+      self.recieved_quests << RecievedQuest.create({quest_id: quest_id, status: 1}) #1 means in-progress, 2 means completed
+    else
+      -1
+    end
+  end
+
   def get_clue clue_id
 
     if self.recieved_clues.select{|rc| rc.clue_id==clue_id}.empty?

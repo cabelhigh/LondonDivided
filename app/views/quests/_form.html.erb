@@ -23,12 +23,12 @@
 
   <div class="field">
     <%= f.label :day %>
-    <%= f.number_field :day %>
+    <%= f.select :day, [1,2,3] %>
   </div>
 
   <div class="field">
     <%= f.label :quest_type %>
-    <%= f.number_field :quest_type %>
+    <%= f.select :quest_type, ["Main", "Item", "Side", "Cash"] %>
   </div>
 
   <div class="field">
@@ -37,13 +37,13 @@
   </div>
 
   <div class="field">
-    <%= f.label :item_output %>
-    <%= f.number_field :item_output %>
+    <%= f.label :clue_output %>
+    <%= f.number_field :clue_output %>
   </div>
 
   <div class="field">
-    <%= f.label :dependent_on %>
-    <%= f.number_field :dependent_on %>
+    <%= f.label :item_output %>
+    <%= f.number_field :item_output %>
   </div>
 
   <div class="field">

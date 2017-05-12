@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170512051736) do
+ActiveRecord::Schema.define(version: 20170512065059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,7 +108,7 @@ ActiveRecord::Schema.define(version: 20170512051736) do
     t.string   "quest_name"
     t.text     "description"
     t.integer  "day"
-    t.integer  "quest_type"
+    t.string   "quest_type"
     t.integer  "money_output"
     t.integer  "item_output"
     t.integer  "dependent_on"

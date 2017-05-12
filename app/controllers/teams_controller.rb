@@ -17,7 +17,7 @@ class TeamsController < ApplicationController
   def show
     if current_admin.has_role? :vendor
       @quests = []
-      @quests = Quest.find(@team.recieved_quests.map(&:quest_id)).where(quest_type: "Vendor") if  !Quest.find(@team.recieved_quests.map(&:quest_id)).empty?
+      @quests = Quest.find(@team.recieved_quests.map(&:quest_id)).where(quest_type: "Item") if  !Quest.find(@team.recieved_quests.map(&:quest_id)).empty?
       render 'show_vendor.html.erb'
     else
       account_sid = "AC9e9bfc18bbe241dbce81a0874e809d12"
@@ -101,6 +101,19 @@ class TeamsController < ApplicationController
         format.json { render :show, status: :created, location: @team }
       else
         format.html { redirect_to @team, notice: 'Team already owns that property.' }
+        format.json { render json: @team.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def recieve_quest
+    result = @team.recieve_quest Quest.find_by_quest_name(params["team"]["recieved_quests"]).id
+    respond_to do |format|
+      if @team.save && result!=-1
+        format.html { redirect_to @team, notice: 'Quest successfully received.' }
+        format.json { render :show, status: :created, location: @team }
+      else
+        format.html { redirect_to @team, notice: 'Team already has that quest.' }
         format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end
